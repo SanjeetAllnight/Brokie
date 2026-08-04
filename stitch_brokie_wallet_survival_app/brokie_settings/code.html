@@ -1,0 +1,335 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Brokie - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#544246",
+                        "secondary-fixed": "#e8ddff",
+                        "surface-dim": "#dbdad8",
+                        "error": "#ba1a1a",
+                        "primary-container": "#f27fa0",
+                        "on-secondary-fixed-variant": "#4c3c7d",
+                        "background": "#fbf9f7",
+                        "on-primary-fixed": "#3f001a",
+                        "secondary-fixed-dim": "#cebdff",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#efedec",
+                        "tertiary-container": "#ab9eb6",
+                        "secondary-container": "#c6b3fe",
+                        "on-tertiary-fixed": "#20182a",
+                        "on-primary-fixed-variant": "#7f2444",
+                        "inverse-surface": "#30302f",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb1c4",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#dac0c5",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#200c4f",
+                        "on-background": "#1b1c1b",
+                        "surface": "#fbf9f7",
+                        "tertiary-fixed": "#ecddf7",
+                        "outline": "#877276",
+                        "surface-container-highest": "#e4e2e0",
+                        "surface-container-low": "#f5f3f1",
+                        "on-tertiary-fixed-variant": "#4d4357",
+                        "surface-bright": "#fbf9f7",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e9e8e6",
+                        "surface-tint": "#9e3c5c",
+                        "on-tertiary-container": "#3f3549",
+                        "on-secondary-container": "#524284",
+                        "tertiary-fixed-dim": "#d0c1db",
+                        "inverse-on-surface": "#f2f0ee",
+                        "primary-fixed-dim": "#ffb1c4",
+                        "secondary": "#645497",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#6e1637",
+                        "on-surface": "#1b1c1b",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#655a70",
+                        "primary": "#9e3c5c",
+                        "primary-fixed": "#ffd9e0",
+                        "surface-variant": "#e4e2e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "base": "8px",
+                        "card-inner": "20px",
+                        "stack-gap": "16px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "display-currency": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "800" }],
+                        "display-currency": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom styles for the segmented control */
+        .segmented-control input[type="radio"]:checked + label {
+            background-color: theme('colors.primary-container');
+            color: theme('colors.on-primary-container');
+            font-weight: 700;
+        }
+        
+        /* Custom toggle switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.primary');
+        }
+        
+        /* Ambient Background Gradient */
+        body {
+            background: linear-gradient(135deg, theme('colors.background') 0%, theme('colors.surface-container-low') 100%);
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="h-full bg-background text-on-surface antialiased overflow-x-hidden pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-background shadow-[0_4px_24px_rgba(75,59,124,0.04)] md:shadow-none">
+<div class="flex items-center justify-between px-container-padding py-base w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<!-- Leading Avatar -->
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A stylized, modern 3D avatar of a slightly stressed but determined financial planner, soft lighting, vibrant coral pink and deep indigo background, high quality, digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu_3EzqxPUnNNuk6yoiDdXzbpIBiMHFvxLzjxL-JQvGk4_aqUSEG-epDrMK0qHESfMqzZT2Dca-hTfcbL8HaRWec4bJTh8s1I7ktn17jWZjWoLUfpDP97aa0C0SSCcN4akSLRQE6RSe73dZQykVKIaupqnXDfie3JcpD8JC2ov4SPj3ahU1Yt7t8ygMKqIbA6IG_SBOn9JbWL2r_OPFNHW7c5wNRn7qprunTjXeGWTAlHGirBeWm6-Og">
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Brokie</h1>
+</div>
+<!-- Web Nav (Hidden on Mobile) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-colors group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform duration-150">home</span>
+<span class="font-label-caps text-label-caps uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-colors group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform duration-150">leaderboard</span>
+<span class="font-label-caps text-label-caps uppercase">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-colors group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform duration-150">add_circle</span>
+<span class="font-label-caps text-label-caps uppercase">Add</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold scale-110" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-caps text-label-caps uppercase">Settings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-colors group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform duration-150">shield</span>
+<span class="font-label-caps text-label-caps uppercase">Vault</span>
+</a>
+</nav>
+<!-- Trailing Icon -->
+<button class="text-primary hover:opacity-80 transition-opacity duration-200 w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-low md:bg-transparent">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-3xl mx-auto px-container-padding py-6 flex flex-col gap-stack-gap">
+<!-- Header Section -->
+<div class="mb-4">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Settings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Tweak your survival parameters.</p>
+</div>
+<!-- Roast Intensity Card -->
+<section class="bg-surface-container-lowest rounded-DEFAULT p-card-inner shadow-[0px_8px_24px_rgba(75,59,124,0.08)] border border-surface-variant/50">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div>
+<h3 class="font-headline-md text-[20px] leading-[28px] font-bold text-on-surface">Roast Intensity</h3>
+<p class="font-body-md text-sm text-on-surface-variant">How mean should Brokie be?</p>
+</div>
+</div>
+<div class="segmented-control flex bg-surface-container-low p-1 rounded-full w-full">
+<div class="flex-1 relative">
+<input class="sr-only" id="roast-gentle" name="roast" type="radio">
+<label class="cursor-pointer w-full text-center py-2 px-4 rounded-full font-body-md text-sm text-on-surface-variant transition-all duration-200 flex items-center justify-center gap-2 hover:bg-surface-container-high" for="roast-gentle">
+<span>😇 Gentle</span>
+</label>
+</div>
+<div class="flex-1 relative">
+<input checked="" class="sr-only" id="roast-sarcastic" name="roast" type="radio">
+<label class="cursor-pointer w-full text-center py-2 px-4 rounded-full font-body-md text-sm text-on-surface-variant transition-all duration-200 flex items-center justify-center gap-2 hover:bg-surface-container-high" for="roast-sarcastic">
+<span>😏 Sarcastic</span>
+</label>
+</div>
+<div class="flex-1 relative">
+<input class="sr-only" id="roast-unhinged" name="roast" type="radio">
+<label class="cursor-pointer w-full text-center py-2 px-4 rounded-full font-body-md text-sm text-on-surface-variant transition-all duration-200 flex items-center justify-center gap-2 hover:bg-surface-container-high" for="roast-unhinged">
+<span>🔥 Unhinged</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Danger Zone Card -->
+<section class="bg-surface-container-lowest rounded-DEFAULT p-card-inner shadow-[0px_8px_24px_rgba(75,59,124,0.08)] border border-surface-variant/50 relative overflow-hidden">
+<!-- Subtle gradient background for danger zone -->
+<div class="absolute inset-0 bg-gradient-to-br from-error-container/20 to-transparent pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<h3 class="font-headline-md text-[20px] leading-[28px] font-bold text-on-surface">Danger Zone</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Alert me when balance drops below</p>
+</div>
+</div>
+<div class="relative flex items-center mt-2">
+<span class="absolute left-4 font-headline-md text-[20px] text-on-surface-variant font-bold">$</span>
+<input class="w-full bg-surface-container-low border-0 rounded-lg py-4 pl-10 pr-4 font-body-lg text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-colors shadow-inner" placeholder="0.00" type="number" value="100.00">
+</div>
+</div>
+</section>
+<!-- Preferences List Card -->
+<section class="bg-surface-container-lowest rounded-DEFAULT overflow-hidden shadow-[0px_8px_24px_rgba(75,59,124,0.08)] border border-surface-variant/50">
+<!-- Push Notifications -->
+<div class="p-card-inner border-b border-surface-variant/30 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div>
+<h3 class="font-body-lg text-on-surface">Daily Reality Check</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Push notifications</p>
+</div>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-surface-variant transition-transform duration-200 z-10" id="toggle-notifications" name="toggle" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-200" for="toggle-notifications"></label>
+</div>
+</div>
+<!-- Time Picker (visible when enabled) -->
+<div class="flex items-center gap-3 pl-[52px]">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">schedule</span>
+<input class="bg-surface-container-low border-0 rounded-md py-1 px-3 font-body-md text-sm text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-colors" type="time" value="09:00">
+</div>
+</div>
+<!-- Dark Mode -->
+<div class="p-card-inner border-b border-surface-variant/30 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-inverse-surface flex items-center justify-center text-inverse-on-surface">
+<span class="material-symbols-outlined">dark_mode</span>
+</div>
+<h3 class="font-body-lg text-on-surface">Dark Mode</h3>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-surface-variant transition-transform duration-200 z-10" id="toggle-darkmode" name="toggle" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-variant cursor-pointer transition-colors duration-200" for="toggle-darkmode"></label>
+</div>
+</div>
+<!-- Currency Links -->
+<a class="p-card-inner border-b border-surface-variant/30 flex items-center justify-between hover:bg-surface-container-low transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">currency_exchange</span>
+</div>
+<h3 class="font-body-lg text-on-surface">Default Currency</h3>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="font-body-md">USD ($)</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</a>
+<a class="p-card-inner border-b border-surface-variant/30 flex items-center justify-between hover:bg-surface-container-low transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">download</span>
+</div>
+<h3 class="font-body-lg text-on-surface">Export Data</h3>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+<a class="p-card-inner flex items-center justify-between hover:bg-surface-container-low transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">info</span>
+</div>
+<div>
+<h3 class="font-body-lg text-on-surface">About</h3>
+<p class="font-body-md text-xs text-on-surface-variant">v1.4.2</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+</a>
+</section>
+<!-- Danger Zone Action -->
+<div class="mt-4 mb-8">
+<button class="w-full py-4 rounded-lg border-2 border-error text-error font-body-lg font-bold hover:bg-error-container/20 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">delete_forever</span>
+                Reset All Data
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-surface-container-lowest shadow-[0px_-8px_24px_rgba(75,59,124,0.08)] rounded-t-lg border-t-0">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-colors w-16" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-caps text-label-caps uppercase">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-colors w-16" href="#">
+<span class="material-symbols-outlined mb-1">leaderboard</span>
+<span class="font-label-caps text-label-caps uppercase">Stats</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-colors w-16" href="#">
+<span class="material-symbols-outlined mb-1">add_circle</span>
+<span class="font-label-caps text-label-caps uppercase">Add</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold scale-110 w-16 transform transition-transform duration-150" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-caps text-label-caps uppercase">Settings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary-container transition-colors w-16" href="#">
+<span class="material-symbols-outlined mb-1">shield</span>
+<span class="font-label-caps text-label-caps uppercase">Vault</span>
+</a>
+</nav>
+<script>
+        // Simple script to handle segmented control animation/logic if needed
+        document.querySelectorAll('.segmented-control input').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                // Remove bold from all labels
+                document.querySelectorAll('.segmented-control label').forEach(lbl => {
+                    lbl.classList.remove('font-bold');
+                });
+                // Add bold to checked label handled mostly by CSS, but good for JS state if needed
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .material-symbols-outlined.fill {
+    font-variation-settings: 'FILL' 1;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #f27fa0 0%, #cebdff 100%);
+    background-attachment: fixed;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 8px 24px rgba(75, 59, 124, 0.08);
+  }
+  
+  .donut-chart {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #9e3c5c 0% 45%, /* Food */
+        #645497 45% 70%, /* Transport */
+        #655a70 70% 85%, /* Entertainment */
+        #f27fa0 85% 100% /* Others */
+    );
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .donut-hole {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background-color: #fbf9f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .segmented-control input[type="radio"]:checked + label {
+    background-color: theme('colors.primary-container');
+    color: theme('colors.on-primary-container');
+    font-weight: 700;
+  }
+  
+  .toggle-checkbox:checked {
+    right: 0;
+    border-color: theme('colors.primary');
+  }
+  .toggle-checkbox:checked + .toggle-label {
+    background-color: theme('colors.primary');
+  }
+
+  .brokie-input:focus {
+    outline: none;
+    border: 2px solid #645497;
+    box-shadow: 0 0 0 4px rgba(100, 84, 151, 0.1);
+  }
+  .brokie-card {
+    box-shadow: 0px 8px 24px rgba(75, 59, 124, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .brokie-card:hover, .brokie-card:active {
+    transform: translateY(-2px);
+    box-shadow: 0px 12px 32px rgba(75, 59, 124, 0.12);
+  }
+}

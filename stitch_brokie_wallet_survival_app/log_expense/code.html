@@ -1,0 +1,273 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Brokie - Add Expense</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#544246",
+                        "secondary-fixed": "#e8ddff",
+                        "surface-dim": "#dbdad8",
+                        "error": "#ba1a1a",
+                        "primary-container": "#f27fa0",
+                        "on-secondary-fixed-variant": "#4c3c7d",
+                        "background": "#fbf9f7",
+                        "on-primary-fixed": "#3f001a",
+                        "secondary-fixed-dim": "#cebdff",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#efedec",
+                        "tertiary-container": "#ab9eb6",
+                        "secondary-container": "#c6b3fe",
+                        "on-tertiary-fixed": "#20182a",
+                        "on-primary-fixed-variant": "#7f2444",
+                        "inverse-surface": "#30302f",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#ffb1c4",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#dac0c5",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#200c4f",
+                        "on-background": "#1b1c1b",
+                        "surface": "#fbf9f7",
+                        "tertiary-fixed": "#ecddf7",
+                        "outline": "#877276",
+                        "surface-container-highest": "#e4e2e0",
+                        "surface-container-low": "#f5f3f1",
+                        "on-tertiary-fixed-variant": "#4d4357",
+                        "surface-bright": "#fbf9f7",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#e9e8e6",
+                        "surface-tint": "#9e3c5c",
+                        "on-tertiary-container": "#3f3549",
+                        "on-secondary-container": "#524284",
+                        "tertiary-fixed-dim": "#d0c1db",
+                        "inverse-on-surface": "#f2f0ee",
+                        "primary-fixed-dim": "#ffb1c4",
+                        "secondary": "#645497",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#6e1637",
+                        "on-surface": "#1b1c1b",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#655a70",
+                        "primary": "#9e3c5c",
+                        "primary-fixed": "#ffd9e0",
+                        "surface-variant": "#e4e2e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "base": "8px",
+                        "card-inner": "20px",
+                        "stack-gap": "16px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "display-currency": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "800" }],
+                        "display-currency": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .keypad-btn {
+            @apply flex items-center justify-center font-headline-lg text-headline-lg text-on-surface h-16 w-full rounded-DEFAULT hover:bg-surface-container-highest transition-colors active:scale-95;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background h-full flex flex-col font-body-md overflow-hidden">
+<!-- Top App Bar -->
+<header class="flex items-center justify-between px-container-padding py-base w-full bg-background dark:bg-background z-10 shrink-0">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A stylized 3D avatar of a young adult looking slightly stressed about money, vibrant colors, modern cartoon style, light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG3IT7hHfXIw0ryZ2ZXJyMF7biRccp9Ki5TZU_enXRTjKqHAr2NoH3sXgiNc9L_LTqVSFl9JrrMTh7B5WNrFUfWrbaS1KVmJ0UeacczLgciSPsMHECjTbDp9uPhkQsniPcxfTCOizle8DtG2-5K9qY2rce05oWCqYz6LAoKemzvXxWnarKCR2ok4ZA_HU__3EEfUWlP1BpgQt8laIcuNI89dE7yGfTGvDeKlhwPkJ4P4gdubUdpKDhIg">
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Brokie</h1>
+</div>
+<button class="hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style="font-size: 28px;">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col overflow-y-auto pb-24 px-container-padding">
+<!-- Amount Display -->
+<div class="flex flex-col items-center justify-center py-8 shrink-0">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">AMOUNT TO LOG</p>
+<div class="flex items-start text-primary">
+<span class="font-headline-md text-headline-md mt-2">$</span>
+<span class="font-display-currency text-display-currency text-primary" id="amountDisplay">0.00</span>
+</div>
+</div>
+<!-- Categories (Scrollable) -->
+<div class="mb-6 shrink-0 -mx-container-padding px-container-padding">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-3 px-1">CATEGORY</p>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2 pt-1 px-1">
+<button class="flex flex-col items-center gap-2 group shrink-0">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform ring-2 ring-primary">
+<span class="material-symbols-outlined text-on-primary-container" data-weight="fill" style="font-size: 32px;">restaurant</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface">Food</span>
+</button>
+<button class="flex flex-col items-center gap-2 group shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px;">coffee</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Coffee</span>
+</button>
+<button class="flex flex-col items-center gap-2 group shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px;">directions_car</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Transport</span>
+</button>
+<button class="flex flex-col items-center gap-2 group shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px;">shopping_bag</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Shopping</span>
+</button>
+<button class="flex flex-col items-center gap-2 group shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px;">sports_esports</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Gaming</span>
+</button>
+<button class="flex flex-col items-center gap-2 group shrink-0 opacity-60 hover:opacity-100 transition-opacity">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 32px;">school</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Education</span>
+</button>
+</div>
+</div>
+<!-- Note Field -->
+<div class="mb-6 shrink-0">
+<input class="w-full bg-surface-container-low border-0 rounded-DEFAULT px-4 py-3 font-body-lg text-body-lg text-on-surface placeholder:text-on-surface-variant/50 focus:ring-2 focus:ring-secondary focus:bg-surface-container transition-all" placeholder="What did you buy now?" type="text">
+</div>
+<!-- Keypad -->
+<div class="grid grid-cols-3 gap-2 mb-6 mt-auto">
+<button class="keypad-btn" onclick="appendNumber(1)">1</button>
+<button class="keypad-btn" onclick="appendNumber(2)">2</button>
+<button class="keypad-btn" onclick="appendNumber(3)">3</button>
+<button class="keypad-btn" onclick="appendNumber(4)">4</button>
+<button class="keypad-btn" onclick="appendNumber(5)">5</button>
+<button class="keypad-btn" onclick="appendNumber(6)">6</button>
+<button class="keypad-btn" onclick="appendNumber(7)">7</button>
+<button class="keypad-btn" onclick="appendNumber(8)">8</button>
+<button class="keypad-btn" onclick="appendNumber(9)">9</button>
+<button class="keypad-btn text-2xl font-bold" onclick="appendDot()">.</button>
+<button class="keypad-btn" onclick="appendNumber(0)">0</button>
+<button class="keypad-btn text-on-surface-variant" onclick="backspace()">
+<span class="material-symbols-outlined" style="font-size: 28px;">backspace</span>
+</button>
+</div>
+<!-- Primary Action -->
+<button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md py-4 rounded-lg shadow-lg hover:opacity-90 active:scale-95 transition-all mb-4 shrink-0">
+            Log it
+        </button>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-surface-container-lowest dark:bg-inverse-surface shadow-[0px_-8px_24px_rgba(75,59,124,0.08)] rounded-t-lg">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary-container transition-colors w-16">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-caps text-label-caps text-[10px]">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary-container transition-colors w-16">
+<span class="material-symbols-outlined mb-1">leaderboard</span>
+<span class="font-label-caps text-label-caps text-[10px]">Stats</span>
+</button>
+<!-- Active State: Add -->
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold scale-110 active:scale-95 transition-transform duration-150 w-16 -mt-2">
+<div class="bg-primary-container text-on-primary-container rounded-full p-2 shadow-md">
+<span class="material-symbols-outlined" data-weight="fill" style="font-size: 28px;">add_circle</span>
+</div>
+<span class="font-label-caps text-label-caps text-[10px] mt-1">Add</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary-container transition-colors w-16">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-label-caps text-label-caps text-[10px]">Settings</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary-container transition-colors w-16">
+<span class="material-symbols-outlined mb-1">shield</span>
+<span class="font-label-caps text-label-caps text-[10px]">Vault</span>
+</button>
+</nav>
+<script>
+        let currentInput = "";
+        const display = document.getElementById('amountDisplay');
+
+        function updateDisplay() {
+            if (currentInput === "") {
+                display.innerText = "0.00";
+            } else {
+                // Formatting logic could go here to ensure always 2 decimal places if needed, 
+                // but for simple visual mockup we just show what's typed.
+                display.innerText = currentInput;
+            }
+        }
+
+        function appendNumber(num) {
+            // Prevent too many digits
+            if (currentInput.length > 8) return;
+            // Prevent multiple leading zeros
+            if (currentInput === "0" && num === 0) return;
+            if (currentInput === "0" && num !== 0) {
+                 currentInput = num.toString();
+            } else {
+                currentInput += num.toString();
+            }
+            updateDisplay();
+        }
+
+        function appendDot() {
+            if (currentInput.includes('.')) return;
+            if (currentInput === "") {
+                currentInput = "0.";
+            } else {
+                currentInput += ".";
+            }
+            updateDisplay();
+        }
+
+        function backspace() {
+            currentInput = currentInput.slice(0, -1);
+            updateDisplay();
+        }
+    </script>
+</body></html>

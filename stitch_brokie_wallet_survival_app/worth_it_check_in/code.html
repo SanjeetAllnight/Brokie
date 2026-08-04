@@ -1,0 +1,253 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Brokie - Quick Check-in</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#544246",
+                    "secondary-fixed": "#e8ddff",
+                    "surface-dim": "#dbdad8",
+                    "error": "#ba1a1a",
+                    "primary-container": "#f27fa0",
+                    "on-secondary-fixed-variant": "#4c3c7d",
+                    "background": "#fbf9f7",
+                    "on-primary-fixed": "#3f001a",
+                    "secondary-fixed-dim": "#cebdff",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#efedec",
+                    "tertiary-container": "#ab9eb6",
+                    "secondary-container": "#c6b3fe",
+                    "on-tertiary-fixed": "#20182a",
+                    "on-primary-fixed-variant": "#7f2444",
+                    "inverse-surface": "#30302f",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#ffb1c4",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#dac0c5",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#200c4f",
+                    "on-background": "#1b1c1b",
+                    "surface": "#fbf9f7",
+                    "tertiary-fixed": "#ecddf7",
+                    "outline": "#877276",
+                    "surface-container-highest": "#e4e2e0",
+                    "surface-container-low": "#f5f3f1",
+                    "on-tertiary-fixed-variant": "#4d4357",
+                    "surface-bright": "#fbf9f7",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#e9e8e6",
+                    "surface-tint": "#9e3c5c",
+                    "on-tertiary-container": "#3f3549",
+                    "on-secondary-container": "#524284",
+                    "tertiary-fixed-dim": "#d0c1db",
+                    "inverse-on-surface": "#f2f0ee",
+                    "primary-fixed-dim": "#ffb1c4",
+                    "secondary": "#645497",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#6e1637",
+                    "on-surface": "#1b1c1b",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary": "#655a70",
+                    "primary": "#9e3c5c",
+                    "primary-fixed": "#ffd9e0",
+                    "surface-variant": "#e4e2e0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "24px",
+                    "base": "8px",
+                    "card-inner": "20px",
+                    "stack-gap": "16px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-caps": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "display-currency": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-md": [
+                            "Plus Jakarta Sans"
+                    ]
+            },
+            "fontSize": {
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "display-currency": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body {
+            /* Linear gradient background for the "World" layer */
+            background: linear-gradient(135deg, #fbf9f7 0%, #efedec 100%);
+            background-attachment: fixed;
+        }
+        /* Custom styles for focus rings and form inputs to match theme */
+        .brokie-input:focus {
+            outline: none;
+            border: 2px solid #645497; /* Secondary deep indigo */
+            box-shadow: 0 0 0 4px rgba(100, 84, 151, 0.1);
+        }
+        .brokie-card {
+            box-shadow: 0px 8px 24px rgba(75, 59, 124, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .brokie-card:hover, .brokie-card:active {
+            transform: translateY(-2px);
+            box-shadow: 0px 12px 32px rgba(75, 59, 124, 0.12);
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md min-h-screen flex flex-col items-center pt-12 pb-24 px-container-padding selection:bg-primary-container selection:text-on-primary-container">
+<!-- Main Content Canvas - Suppressed Nav Shells for Task-Focused Flow -->
+<main class="w-full max-w-md flex flex-col gap-8 relative z-10">
+<!-- Top App Bar / Header (Simplified for focused flow) -->
+<header class="w-full top-0 bg-transparent flex items-center justify-between py-base mb-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Brokie</h1>
+<button aria-label="Close Check-in" class="text-on-surface-variant hover:opacity-80 transition-opacity duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
+</button>
+</header>
+<!-- Post-log Confirmation Banner -->
+<section class="bg-primary-container rounded-lg p-card-inner flex items-center gap-4 text-on-primary-container brokie-card shadow-lg" role="alert">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div>
+<p class="font-body-md text-body-md opacity-90">Success!</p>
+<p class="font-headline-md text-headline-md font-bold tracking-tight">Logged $4.50 for Coffee</p>
+</div>
+</section>
+<!-- "Worth it?" Prompt -->
+<section class="flex flex-col gap-stack-gap mt-4">
+<div class="text-center mb-2">
+<h2 class="font-headline-lg text-headline-lg mb-2">Worth it?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Be honest. Your future self is watching.</p>
+</div>
+<!-- Tappable Cards Grid -->
+<div class="grid grid-cols-2 gap-4">
+<button class="brokie-card bg-surface-container-lowest rounded-lg p-6 flex flex-col items-center justify-center gap-4 border-2 border-transparent focus:border-secondary transition-all group">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">
+                        😌
+                    </div>
+<span class="font-body-lg text-body-lg font-bold text-center">Worth it</span>
+</button>
+<button class="brokie-card bg-surface-container-lowest rounded-lg p-6 flex flex-col items-center justify-center gap-4 border-2 border-transparent focus:border-secondary transition-all group">
+<div class="w-16 h-16 rounded-full bg-error/10 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">
+                        😬
+                    </div>
+<span class="font-body-lg text-body-lg font-bold text-center">Instant regret</span>
+</button>
+</div>
+</section>
+<hr class="border-outline-variant my-4">
+<!-- Resisted Temptation Section (Expanding Form) -->
+<section class="flex flex-col gap-4">
+<button class="flex items-center justify-center gap-2 text-secondary font-body-lg text-body-lg hover:opacity-80 transition-opacity p-4 rounded-lg border-2 border-secondary border-dashed" id="toggle-resist-btn">
+<span>😤</span>
+<span>Log a resisted temptation instead</span>
+</button>
+<!-- Hidden Form for Resisted Temptation -->
+<div class="hidden bg-surface-container-lowest p-card-inner rounded-lg brokie-card flex flex-col gap-4" id="resist-form">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">shield</span>
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface">Dodged a Bullet</h3>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="item-name">What did you resist?</label>
+<input class="brokie-input bg-surface-container-low border-none rounded-lg p-4 font-body-md text-body-md w-full focus:ring-0" id="item-name" placeholder="e.g. Avocado Toast" type="text">
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="est-cost">Estimated Savings ($)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline-md text-headline-md text-on-surface-variant">$</span>
+<input class="brokie-input bg-surface-container-low border-none rounded-lg p-4 pl-8 font-display-currency text-display-currency w-full focus:ring-0 h-16" id="est-cost" placeholder="0.00" type="number">
+</div>
+</div>
+<button class="w-full bg-secondary text-on-secondary font-body-lg text-body-lg font-bold py-4 rounded-full mt-2 hover:opacity-90 transition-opacity">
+                    Bank these savings
+                </button>
+</div>
+</section>
+</main>
+<script>
+        // Simple toggle logic for the "Resisted Temptation" form
+        const toggleBtn = document.getElementById('toggle-resist-btn');
+        const form = document.getElementById('resist-form');
+
+        toggleBtn.addEventListener('click', () => {
+            if (form.classList.contains('hidden')) {
+                form.classList.remove('hidden');
+                toggleBtn.classList.add('bg-secondary/10');
+            } else {
+                form.classList.add('hidden');
+                toggleBtn.classList.remove('bg-secondary/10');
+            }
+        });
+    </script>
+</body></html>
