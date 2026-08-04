@@ -5,7 +5,7 @@ export default function BottomNavBar() {
   const path = location.pathname;
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-surface-container-lowest dark:bg-inverse-surface shadow-[0px_-8px_24px_rgba(75,59,124,0.08)] rounded-t-lg md:hidden">
+    <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-surface-container-lowest dark:bg-inverse-surface shadow-[0px_-8px_24px_rgba(75,59,124,0.08)] rounded-t-lg">
       <Link to="/" className={`flex flex-col items-center justify-center transition-transform duration-150 active:scale-95 ${path === '/' ? 'text-primary dark:text-primary-fixed-dim font-bold scale-110' : 'text-on-surface-variant dark:text-on-surface-variant hover:text-primary-container'}`}>
         <span className={`material-symbols-outlined text-[28px] ${path === '/' ? 'fill' : ''}`}>home</span>
         <span className="font-label-caps text-label-caps mt-1">Home</span>
