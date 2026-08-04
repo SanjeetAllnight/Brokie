@@ -1,8 +1,10 @@
 import { useDashboardStats } from '../statistics/useStatistics';
 import { useCurrency } from '../lib/currencyFormat';
 import { getRoastMessage } from '../lib/roastEngine';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+  const navigate = useNavigate();
   const {
     currentBalance,
     todaySpend,
@@ -61,6 +63,21 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Monthly Wrap Banner */}
+        <div 
+          onClick={() => navigate('/wrap')} 
+          className="bg-gradient-to-r from-primary to-tertiary rounded-xl p-5 shadow-lg flex items-center justify-between cursor-pointer hover:opacity-90 transition-opacity relative overflow-hidden"
+        >
+          <div className="absolute -right-4 -top-8 text-[120px] opacity-10">🗓️</div>
+          <div className="z-10 text-on-primary">
+            <h2 className="font-headline-md text-xl font-bold mb-1">Your Monthly Wrap is here!</h2>
+            <p className="font-body-md text-sm opacity-90">Tap to see how much money you wasted this month.</p>
+          </div>
+          <div className="z-10 bg-on-primary/20 p-2 rounded-full backdrop-blur-sm">
+            <span className="material-symbols-outlined text-on-primary">arrow_forward</span>
+          </div>
+        </div>
 
         {/* Stats Grid */}
         <section className="grid grid-cols-2 gap-4">

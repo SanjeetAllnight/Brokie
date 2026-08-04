@@ -45,6 +45,14 @@ import {
   subscribeProgression,
   writeProgression,
 } from '../repositories/progressionRepository';
+import {
+  subscribeGoals,
+  subscribeContributions,
+  addGoal,
+  updateGoal,
+  deleteGoal,
+  addContribution,
+} from '../repositories/goalsRepository';
 import { useAuthStore } from '../store/useAuthStore';
 import { useWalletStore } from '../store/useWalletStore';
 import { useTransactionStore } from '../store/useTransactionStore';
@@ -52,6 +60,7 @@ import { useResistanceStore } from '../store/useResistanceStore';
 import { useProgressionStore } from '../store/useProgressionStore';
 import { useSettingsStore } from '../store/useSettingsStore';
 import { useProfileStore } from '../store/useProfileStore';
+import { useGoalsStore } from '../store/useGoalsStore';
 import {
   evaluateTransaction,
   evaluateRegretUpdate,
@@ -71,6 +80,8 @@ export function useFirebaseSync() {
   const progressionHydrated = useRef(false);
   const settingsHydrated    = useRef(false);
   const profileHydrated     = useRef(false);
+  const goalsHydrated       = useRef(false);
+  const contributionsHydrated = useRef(false);
 
   // Keep uid available inside callbacks without re-mounting
   const uidRef = useRef<string | null>(null);
@@ -192,6 +203,25 @@ export function useFirebaseSync() {
           (err) => console.error('[Firestore] Progression subscription error:', err)
         );
 
+        // ─── Goals & Contributions snapshots → hydrate store ────────────────
+        const unsubGoals = subscribeGoals(
+          uid,
+          (goals) => {
+            goalsHydrated.current = true;
+            useGoalsStore.getState().hydrateGoals(goals);
+          },
+          (err) => console.error('[Firestore] Goals subscription error:', err)
+        );
+
+        const unsubContributions = subscribeContributions(
+          uid,
+          (contributions) => {
+            contributionsHydrated.current = true;
+            useGoalsStore.getState().hydrateContributions(contributions);
+          },
+          (err) => console.error('[Firestore] Contributions subscription error:', err)
+        );
+
         // ─── Write-through: logExpense ─────────────────────────────────────
         // Patch store action to also write to Firestore after local update.
         const originalLogExpense = useTransactionStore.getState().logExpense;
@@ -259,6 +289,15 @@ export function useFirebaseSync() {
               }
               // Progress Engine Evaluation
               evaluateResistance(temptation);
+              
+              // Goals Auto-Contribution
+              const autoGoals = useGoalsStore.getState().goals.filter(g => g.autoContribute);
+              if (autoGoals.length > 0) {
+                // Find a goal to contribute to (e.g. the first one with autoContribute)
+                const targetGoal = autoGoals[0];
+                const addContrib = useGoalsStore.getState().addContribution;
+                addContrib(targetGoal.id, estimatedAmount, 'resisted_temptation');
+              }
             }
             return id;
           },
@@ -298,6 +337,52 @@ export function useFirebaseSync() {
           }
         });
 
+        // ─── Write-through: goals ───────────────────────────────────────────
+        // We only patch the actions for goals since they are individual documents
+        const { 
+          addGoal: originalAddGoal, 
+          updateGoal: originalUpdateGoal, 
+          deleteGoal: originalDeleteGoal, 
+          addContribution: originalAddContribution 
+        } = useGoalsStore.getState();
+
+        useGoalsStore.setState({
+          addGoal: (name, icon, targetAmount, autoContribute) => {
+            const id = originalAddGoal(name, icon, targetAmount, autoContribute);
+            const goal = useGoalsStore.getState().goals.find((g) => g.id === id);
+            if (goal && goalsHydrated.current) {
+              addGoal(uid, goal).catch(console.error);
+            }
+            return id;
+          },
+          updateGoal: (id, updates) => {
+            originalUpdateGoal(id, updates);
+            const goal = useGoalsStore.getState().goals.find((g) => g.id === id);
+            if (goal && goalsHydrated.current) {
+              updateGoal(uid, goal).catch(console.error);
+            }
+          },
+          deleteGoal: (id) => {
+            originalDeleteGoal(id);
+            if (goalsHydrated.current) {
+              deleteGoal(uid, id).catch(console.error);
+            }
+          },
+          addContribution: (goalId, amount, source) => {
+            const id = originalAddContribution(goalId, amount, source);
+            const contribution = useGoalsStore.getState().contributions.find((c) => c.id === id);
+            if (contribution && contributionsHydrated.current) {
+              addContribution(uid, contribution).catch(console.error);
+            }
+            // Update the goal amount in firestore
+            const goal = useGoalsStore.getState().goals.find((g) => g.id === goalId);
+            if (goal && goalsHydrated.current) {
+              updateGoal(uid, goal).catch(console.error);
+            }
+            return id;
+          }
+        });
+
         // ─── Cleanup subscriptions on unmount ─────────────────────────────
         return () => {
           unsubWallet();
@@ -309,6 +394,8 @@ export function useFirebaseSync() {
           unsubSettingsStore();
           unsubProfile();
           unsubProfileStore();
+          unsubGoals();
+          unsubContributions();
         };
       },
       (err) => {

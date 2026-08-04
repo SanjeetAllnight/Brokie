@@ -28,10 +28,10 @@ export default function BottomNavBar() {
         <span className="font-label-caps text-label-caps mt-1">Settings</span>
       </Link>
 
-      <button className="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:text-primary-container transition-colors active:scale-95 transition-transform duration-150">
-        <span className="material-symbols-outlined text-[24px]">shield</span>
+      <Link to="/goals" className={`flex flex-col items-center justify-center transition-transform duration-150 active:scale-95 ${path === '/goals' ? 'text-primary dark:text-primary-fixed-dim font-bold scale-110' : 'text-on-surface-variant dark:text-on-surface-variant hover:text-primary-container'}`}>
+        <span className={`material-symbols-outlined text-[24px] ${path === '/goals' ? 'fill' : ''}`}>shield</span>
         <span className="font-label-caps text-label-caps mt-1">Vault</span>
-      </button>
+      </Link>
     </nav>
   );
 }

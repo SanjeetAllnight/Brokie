@@ -9,6 +9,8 @@ import LogExpense from './pages/LogExpense';
 import WorthItCheckIn from './pages/WorthItCheckIn';
 import Stats from './pages/Stats';
 import Settings from './pages/Settings';
+import SavingsGoals from './pages/SavingsGoals';
+import MonthlyWrap from './pages/MonthlyWrap';
 import { usePushNotifications } from './notifications/usePushNotifications';
 
 // Inner component so hooks can access SyncProvider context (auth state)
@@ -22,11 +24,13 @@ function AppRoutes() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/goals" element={<SavingsGoals />} />
           <Route path="/log-expense" element={<LogExpense />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
-        {/* WorthItCheckIn does not use the MainLayout because it suppresses nav shells */}
+        {/* WorthItCheckIn and MonthlyWrap do not use the MainLayout because they are full screen */}
         <Route path="/worth-it" element={<WorthItCheckIn />} />
+        <Route path="/wrap" element={<MonthlyWrap />} />
       </Routes>
     </>
   );
