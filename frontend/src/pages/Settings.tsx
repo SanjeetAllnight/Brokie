@@ -2,7 +2,6 @@ import { useWalletStore } from '../store/useWalletStore';
 import { useSettingsStore } from '../store/useSettingsStore';
 import { useProfileStore } from '../store/useProfileStore';
 import { CURRENCIES } from '../lib/currencyFormat';
-import DeveloperSettings from '../components/DeveloperSettings';
 import { usePushNotifications } from '../notifications/usePushNotifications';
 import { isNotificationSupported } from '../notifications/notificationService';
 
@@ -220,8 +219,6 @@ export default function Settings() {
             <span className="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
           </a>
         </section>
-        
-        <DeveloperSettings />
       </div>
     </>
   );

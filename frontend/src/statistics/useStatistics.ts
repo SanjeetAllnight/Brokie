@@ -23,6 +23,7 @@ import {
   type SortOrder,
 } from './statisticsService';
 import type { ExpenseCategory } from '../types/transaction';
+import { getMonthTransactions, getWeekTransactions } from '../lib/transactionHelpers';
 
 export function useStatistics() {
   const transactions = useTransactionStore((s) => s.transactions);
@@ -41,8 +42,7 @@ export function useStatistics() {
   );
 
   const monthlyBreakdown = useMemo(() => {
-    const { getMonthTransactions } = useTransactionStore.getState();
-    return calcCategoryBreakdown(getMonthTransactions());
+    return calcCategoryBreakdown(getMonthTransactions(transactions));
   }, [transactions]);
 
   const topCategories = useMemo(
@@ -81,8 +81,7 @@ export function useStatistics() {
   );
 
   const monthlyDonutSegments = useMemo(() => {
-    const { getMonthTransactions } = useTransactionStore.getState();
-    return calcDonutSegments(getMonthTransactions());
+    return calcDonutSegments(getMonthTransactions(transactions));
   }, [transactions]);
 
   return {
@@ -138,12 +137,10 @@ export function useDashboardStats() {
 
   const transactions = useTransactionStore((s) => s.transactions);
   const weekTotal  = useMemo(() => {
-    const { getWeekTransactions } = useTransactionStore.getState();
-    return getWeekTransactions().reduce((s, t) => s + t.amount, 0);
+    return getWeekTransactions(transactions).reduce((s, t) => s + t.amount, 0);
   }, [transactions]);
   const monthTotal = useMemo(() => {
-    const { getMonthTransactions } = useTransactionStore.getState();
-    return getMonthTransactions().reduce((s, t) => s + t.amount, 0);
+    return getMonthTransactions(transactions).reduce((s, t) => s + t.amount, 0);
   }, [transactions]);
 
   return {

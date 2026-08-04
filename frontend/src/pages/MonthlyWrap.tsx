@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTransactionStore } from '../store/useTransactionStore';
 import { useResistanceStore } from '../store/useResistanceStore';
@@ -32,6 +32,15 @@ export default function MonthlyWrap() {
     return generateStoryPages(data, roastIntensity, currencyCode);
   }, [monthlyTransactions, transactions, temptations, currentBalance, walletHP, roastIntensity, currencyCode]);
 
+  const next = useCallback(() => {
+    if (currentPage < pages.length - 1) setCurrentPage(p => p + 1);
+    else navigate('/');
+  }, [currentPage, pages.length, navigate]);
+
+  const prev = useCallback(() => {
+    if (currentPage > 0) setCurrentPage(p => p - 1);
+  }, [currentPage]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') next();
@@ -40,16 +49,7 @@ export default function MonthlyWrap() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentPage, pages.length]);
-
-  const next = () => {
-    if (currentPage < pages.length - 1) setCurrentPage(p => p + 1);
-    else navigate('/');
-  };
-
-  const prev = () => {
-    if (currentPage > 0) setCurrentPage(p => p - 1);
-  };
+  }, [next, prev, navigate]);
 
   if (pages.length === 0) return null;
 

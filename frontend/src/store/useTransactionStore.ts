@@ -9,10 +9,8 @@ import {
   calcAverageDailySpend,
 } from '../lib/transactionHelpers';
 
-// Seed data is only used as the initial local value.
-// Once Firestore hydration fires via hydrateTransactions(),
-// the seed data is replaced entirely by Firestore data.
-import { SEED_TRANSACTIONS } from '../lib/seedTransactions';
+// Initial empty state before Firestore hydration
+
 
 interface TransactionState {
   transactions: Transaction[];
@@ -37,8 +35,8 @@ interface TransactionState {
 }
 
 export const useTransactionStore = create<TransactionState>((set, get) => ({
-  transactions: [...SEED_TRANSACTIONS],
-  averageDailySpend: calcAverageDailySpend(SEED_TRANSACTIONS),
+  transactions: [],
+  averageDailySpend: 45,
   pendingRegretId: null,
 
   logExpense: (amount, category, note) => {
