@@ -1,0 +1,11 @@
+{
+  "name": "brokie-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install --prefix frontend && npm install --prefix functions",
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend && npm run build --prefix functions",
+    "lint": "npm run lint --prefix frontend && npm run lint --prefix functions"
+  }
+}
