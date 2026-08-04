@@ -24,7 +24,16 @@ const firebaseConfig = {
 // Prevent re-initialisation during hot-module reloads in development
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 
-export const auth = getAuth(app);
+export const isFirebaseConfigured = !!firebaseConfig.apiKey && firebaseConfig.apiKey !== 'your-api-key';
+
+let _auth: ReturnType<typeof getAuth>;
+try {
+  _auth = getAuth(app);
+} catch (error) {
+  console.warn('Firebase Auth initialization failed. Is your API key set?');
+  _auth = {} as any; // Mock to prevent immediate destructuring crashes
+}
+export const auth = _auth;
 
 // Use persistent local cache for offline support (multi-tab safe).
 // initializeFirestore must be called before any getFirestore() calls.

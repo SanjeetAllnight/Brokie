@@ -14,11 +14,11 @@ export interface FirestoreWalletFields {
 }
 
 export const DEFAULT_WALLET: FirestoreWalletFields = {
-  currentBalance: 1240.50,
-  dangerZoneThreshold: 200.00,
-  monthlyBudget: 2000.00,
+  currentBalance: 0,
+  dangerZoneThreshold: 0,
+  monthlyBudget: 0,
   todaySpend: 0,
-  currentMonthIncome: 2500.00,
+  currentMonthIncome: 0,
 };
 
 /** Writes wallet fields to the user document.

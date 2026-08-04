@@ -18,6 +18,7 @@ interface WalletState {
   increaseWallet: (amount: number) => void;
   decreaseWallet: (amount: number) => void;
   setBalance: (amount: number) => void;
+  setMonthlyBudget: (amount: number) => void;
   setDangerZoneThreshold: (amount: number) => void;
   addTodaySpend: (amount: number) => void;
   resetWallet: () => void;
@@ -29,11 +30,11 @@ interface WalletState {
 }
 
 const initialState = {
-  currentBalance: 1240.50,
-  dangerZoneThreshold: 200.00,
-  monthlyBudget: 2000.00,
+  currentBalance: 0,
+  dangerZoneThreshold: 0,
+  monthlyBudget: 0,
   todaySpend: 0,
-  currentMonthIncome: 2500.00,
+  currentMonthIncome: 0,
 };
 
 export const useWalletStore = create<WalletState>((set) => ({
@@ -46,6 +47,8 @@ export const useWalletStore = create<WalletState>((set) => ({
     set((state) => ({ currentBalance: state.currentBalance - amount })),
 
   setBalance: (amount) => set({ currentBalance: amount }),
+
+  setMonthlyBudget: (amount) => set({ monthlyBudget: amount }),
 
   setDangerZoneThreshold: (amount) => set({ dangerZoneThreshold: amount }),
 
@@ -67,7 +70,9 @@ export function useDerivedWalletState(averageDailySpend?: number) {
   const monthlyBudget       = useWalletStore((state) => state.monthlyBudget);
 
   // Wallet HP: 0–100% relative to monthly budget
-  const walletHP = Math.max(0, Math.min(100, (currentBalance / monthlyBudget) * 100));
+  const walletHP = monthlyBudget > 0 
+    ? Math.max(0, Math.min(100, (currentBalance / monthlyBudget) * 100))
+    : 0;
 
   // Danger Zone Distance
   const distanceToDangerZone = currentBalance - dangerZoneThreshold;

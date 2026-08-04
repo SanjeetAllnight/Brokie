@@ -266,6 +266,9 @@ export function useFirebaseSync() {
 
         // ─── Write-through: setDangerZoneThreshold ────────────────────────
         const originalSetDangerZone = useWalletStore.getState().setDangerZoneThreshold;
+        const originalSetMonthlyBudget = useWalletStore.getState().setMonthlyBudget;
+        const originalSetBalance = useWalletStore.getState().setBalance;
+        
         useWalletStore.setState({
           setDangerZoneThreshold: (amount) => {
             originalSetDangerZone(amount);
@@ -273,6 +276,18 @@ export function useFirebaseSync() {
               writeWallet(uid, { dangerZoneThreshold: amount }).catch(console.error);
             }
           },
+          setMonthlyBudget: (amount) => {
+            originalSetMonthlyBudget(amount);
+            if (walletHydrated.current) {
+              writeWallet(uid, { monthlyBudget: amount }).catch(console.error);
+            }
+          },
+          setBalance: (amount) => {
+            originalSetBalance(amount);
+            if (walletHydrated.current) {
+              writeWallet(uid, { currentBalance: amount }).catch(console.error);
+            }
+          }
         });
 
         // ─── Write-through: logTemptation ──────────────────────────────────

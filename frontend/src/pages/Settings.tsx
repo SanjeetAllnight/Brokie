@@ -90,26 +90,77 @@ export default function Settings() {
         
         <section className="bg-surface-container-lowest rounded-DEFAULT p-card-inner shadow-[0px_8px_24px_rgba(75,59,124,0.08)] border border-surface-variant/50 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-error-container/20 to-transparent pointer-events-none"></div>
-          <div className="relative z-10 flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
-                <span className="material-symbols-outlined">warning</span>
+          <div className="relative z-10 flex flex-col gap-6">
+            
+            {/* Current Balance */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+                  <span className="material-symbols-outlined">account_balance_wallet</span>
+                </div>
+                <div>
+                  <h3 className="font-headline-md text-[20px] leading-[28px] font-bold text-on-surface">Current Balance</h3>
+                  <p className="font-body-md text-sm text-on-surface-variant">How much money you have right now</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-headline-md text-[20px] leading-[28px] font-bold text-on-surface">Danger Zone</h3>
-                <p className="font-body-md text-sm text-on-surface-variant">Alert me when balance drops below</p>
+              <div className="relative flex items-center">
+                <span className="absolute left-4 font-headline-md text-[20px] text-on-surface-variant font-bold">{useProfileStore.getState().currency === 'USD' ? '$' : currency}</span>
+                <input 
+                  className="w-full bg-surface-container-low border-0 rounded-lg py-4 pl-10 pr-4 font-body-lg text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-colors shadow-inner" 
+                  placeholder="0.00" 
+                  type="number" 
+                  value={useWalletStore((s) => s.currentBalance) || ''}
+                  onChange={(e) => useWalletStore.getState().setBalance(Number(e.target.value))}
+                />
               </div>
             </div>
-            <div className="relative flex items-center mt-2">
-              <span className="absolute left-4 font-headline-md text-[20px] text-on-surface-variant font-bold">$</span>
-              <input 
-                className="w-full bg-surface-container-low border-0 rounded-lg py-4 pl-10 pr-4 font-body-lg text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-colors shadow-inner" 
-                placeholder="0.00" 
-                type="number" 
-                value={dangerZoneThreshold}
-                onChange={(e) => setDangerZoneThreshold(Number(e.target.value))}
-              />
+
+            {/* Monthly Budget */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+                  <span className="material-symbols-outlined">event_note</span>
+                </div>
+                <div>
+                  <h3 className="font-headline-md text-[20px] leading-[28px] font-bold text-on-surface">Monthly Budget</h3>
+                  <p className="font-body-md text-sm text-on-surface-variant">Your target spend limit for the month</p>
+                </div>
+              </div>
+              <div className="relative flex items-center">
+                <span className="absolute left-4 font-headline-md text-[20px] text-on-surface-variant font-bold">{useProfileStore.getState().currency === 'USD' ? '$' : currency}</span>
+                <input 
+                  className="w-full bg-surface-container-low border-0 rounded-lg py-4 pl-10 pr-4 font-body-lg text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-colors shadow-inner" 
+                  placeholder="0.00" 
+                  type="number" 
+                  value={useWalletStore((s) => s.monthlyBudget) || ''}
+                  onChange={(e) => useWalletStore.getState().setMonthlyBudget(Number(e.target.value))}
+                />
+              </div>
             </div>
+
+            {/* Danger Zone */}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+                  <span className="material-symbols-outlined">warning</span>
+                </div>
+                <div>
+                  <h3 className="font-headline-md text-[20px] leading-[28px] font-bold text-on-surface">Danger Zone</h3>
+                  <p className="font-body-md text-sm text-on-surface-variant">Alert me when balance drops below</p>
+                </div>
+              </div>
+              <div className="relative flex items-center">
+                <span className="absolute left-4 font-headline-md text-[20px] text-on-surface-variant font-bold">{useProfileStore.getState().currency === 'USD' ? '$' : currency}</span>
+                <input 
+                  className="w-full bg-surface-container-low border-0 rounded-lg py-4 pl-10 pr-4 font-body-lg text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-colors shadow-inner" 
+                  placeholder="0.00" 
+                  type="number" 
+                  value={dangerZoneThreshold || ''}
+                  onChange={(e) => setDangerZoneThreshold(Number(e.target.value))}
+                />
+              </div>
+            </div>
+
           </div>
         </section>
         
